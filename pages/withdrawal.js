@@ -5,6 +5,8 @@ import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Text, useT
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 
+// Forçando Vercel a pegar o commit mais recente 2
+
 const WithdrawalPage = () => {
   const { currentUser } = useAuth();
   const toast = useToast();
