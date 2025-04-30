@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Text, useToast, Flex, Spinner, Alert, AlertIcon, AlertTitle, AlertDescription } from '@chakra-ui/react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 
 const WithdrawalPage = () => {
