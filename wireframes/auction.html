@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Print - Sistema de Leilão (Wireframe)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #f8f8f8;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a90e2;
+        }
+        .nav-menu {
+            display: flex;
+        }
+        .nav-item {
+            margin-left: 20px;
+            color: #666;
+            text-decoration: none;
+        }
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+        .user-actions a {
+            margin-left: 15px;
+            text-decoration: none;
+            color: #4a90e2;
+        }
+        .breadcrumb {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .breadcrumb a {
+            color: #4a90e2;
+            text-decoration: none;
+        }
+        .auction-tabs {
+            display: flex;
+            margin: 30px 0 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .auction-tab {
+            padding: 10px 20px;
+            margin-right: 5px;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            cursor: pointer;
+        }
+        .auction-tab.active {
+            background-color: white;
+            border-bottom: 1px solid white;
+            margin-bottom: -1px;
+            font-weight: bold;
+        }
+        .create-auction-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4a90e2;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .auction-list {
+            margin-top: 30px;
+        }
+        .auction-card {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: white;
+        }
+        .auction-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .auction-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .auction-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .status-open {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+        .status-closed {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        .status-awarded {
+            background-color: #e8f5e9;
+            color: #388e3c;
+        }
+        .auction-details {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .auction-info {
+            flex: 2;
+        }
+        .auction-specs {
+            flex: 1;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-left: 20px;
+        }
+        .auction-description {
+            margin-bottom: 15px;
+        }
+        .auction-meta {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .auction-meta-item {
+            margin-right: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        .auction-meta-item strong {
+            color: #333;
+        }
+        .auction-spec-item {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .auction-spec-item strong {
+            display: inline-block;
+            width: 100px;
+        }
+        .auction-bids {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        .bids-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .bids-title {
+            font-weight: bold;
+        }
+        .bid-count {
+            color: #666;
+            font-size: 14px;
+        }
+        .bid-card {
+            border: 1px solid #eee;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .bid-info {
+            flex-grow: 1;
+        }
+        .bid-printer {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .bid-details {
+            display: flex;
+            font-size: 14px;
+            color: #666;
+        }
+        .bid-detail {
+            margin-right: 15px;
+        }
+        .bid-actions {
+            display: flex;
+        }
+        .bid-action-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        .btn-accept {
+            background-color: #4caf50;
+            color: white;
+        }
+        .btn-contact {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .place-bid-form {
+            margin-top: 30px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .form-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-height: 100px;
+        }
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        .form-col {
+            flex: 1;
+        }
+        .form-submit {
+            padding: 10px 20px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        .page-item {
+            margin: 0 5px;
+        }
+        .page-link {
+            display: block;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #4a90e2;
+        }
+        .page-link.active {
+            background-color: #4a90e2;
+            color: white;
+            border-color: #4a90e2;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .footer-column {
+            flex-basis: 200px;
+            margin-bottom: 20px;
+        }
+        .footer-column h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .footer-column a {
+            display: block;
+            color: #ddd;
+            text-decoration: none;
+            margin-bottom: 8px;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .nav-menu {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: space-between;
+            }
+            .nav-item {
+                margin-left: 0;
+            }
+            .user-actions {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: space-between;
+            }
+            .user-actions a {
+                margin-left: 0;
+            }
+            .auction-details {
+                flex-direction: column;
+            }
+            .auction-specs {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Go Print</div>
+                <nav class="nav-menu">
+                    <a href="#" class="nav-item">Início</a>
+                    <a href="#" class="nav-item">Marketplace</a>
+                    <a href="#" class="nav-item">Leilões</a>
+                    <a href="#" class="nav-item">Como Funciona</a>
+                </nav>
+                <div class="user-actions">
+                    <a href="#">Entrar</a>
+                    <a href="#">Cadastrar</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="#">Início</a> &gt; <span>Leilões</span>
+        </div>
+
+        <div class="auction-tabs">
+            <div class="auction-tab active">Leilões Abertos</div>
+            <div class="auction-tab">Meus Leilões</div>
+            <div class="auction-tab">Meus Lances</div>
+        </div>
+
+        <a href="#" class="create-auction-btn">Criar Novo Leilão</a>
+
+        <div class="auction-list">
+            <div class="auction-card">
+                <div class="auction-header">
+                    <div class="auction-title">10.000 Flyers A5 Coloridos</div>
+                    <div class="auction-status status-open">Aberto</div>
+                </div>
+                <div class="auction-details">
+                    <div class="auction-info">
+                        <div class="auction-description">
+                            Preciso de 10.000 flyers A5 coloridos, frente e verso, papel couché 115g, para distribuição em evento corporativo. Necessário entrega até 15/05/2025.
+                        </div>
+                        <div class="auction-meta">
+                            <div class="auction-meta-item">
+                                <strong>Orçamento:</strong> Até R$ 2.000,00
+                            </div>
+                            <div class="auction-meta-item">
+                                <strong>Prazo:</strong> 15/05/2025
+                            </div>
+                            <div class="auction-meta-item">
+                                <strong>Leilão encerra em:</strong> 2 dias
+                            </div>
+                        </div>
+                    </div>
+                    <div class="auction-specs">
+                        <div class="auction-spec-item">
+                            <strong>Quantidade:</strong> 10.000 unidades
+                        </div>
+                        <div class="auction-spec-item">
+                            <strong>Tamanho:</strong> A5 (148 x 210 mm)
+                        </div>
+                        <div class="auction-spec-item">
+                            <strong>Papel:</strong> Couché 115g
+                        </div>
+                        <div class="auction-spec-item">
+                            <strong>Cores:</strong> 4x4 (colorido frente e verso)
+                        </div>
+                        <div class="auction-spec-item">
+                            <strong>Acabamento:</strong> Corte reto
+                        </div>
+                    </div>
+                </div>
+                <div class="auction-bids">
+                    <div class="bids-header">
+                        <div class="bids-title">Lances Recebidos</div>
+                        <div class="bid-count">3 lances</div>
+                    </div>
+                    <div class="bid-card">
+                        <div class="bid-info">
+                            <div class="bid-printer">Gráfica Rápida Express</div>
+                            <div class="bid-details">
+                                <div class="bid-detail"><strong>Valor:</strong> R$ 1.850,00</div>
+                                <div class="bid-detail"><strong>Tempo de produção:</strong> 5 dias</div>
+                                <div class="bid-detail"><strong>Entrega:</strong> 2 dias</div>
+                            </div>
+                        </div>
+                        <div class="bid-actions">
+                            <button class="bid-action-btn btn-accept">Aceitar Lance</button>
+                            <button class="bid-action-btn btn-contact">Contatar</button>
+                        </div>
+                    </div>
+                    <div class="bid-card">
+                        <div class="bid-info">
+                            <div class="bid-printer">Gráfica Digital</div>
+                            <div class="bid-details">
+                                <div class="bid-detail"><strong>Valor:</strong> R$ 1.950,00</div>
+                                <div class="bid-detail"><strong>Tempo de produção:</strong> 3 dias</div>
+                                <div class="bid-detail"><strong>Entrega:</strong> 1 dia</div>
+                            </div>
+                        </div>
+                        <div class="bid-actions">
+                            <button class="bid-action-btn btn-accept">Aceitar Lance</button>
+                            <button class="bid-action-btn btn-contact">Contatar</button>
+                        </div>
+                    </div>
+                    <div class="bid-card">
+                        <div class="bid-info">
+                            <div class="bid-printer">Print & Copy</div>
+                            <div class="bid-details">
+                                <div class="bid-detail"><strong>Valor:</strong> R$ 1.750,00</div>
+                                <div class="bid-detail"><strong>Tempo de produção:</strong> 7 dias</div>
+                                <div class="bid-detail"><strong>Entrega:</strong> 2 dias</div>
+                            </div>
+                        </div>
+                        <div class="bid-actions">
+                            <button class="bid-action-btn btn-accept">Aceitar Lance</button>
+                            <button class="bid-action-btn btn-contact">Contatar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auction-card">
+                <div class="auction-header">
+                    <div class="auction-title">500 Catálogos de Produtos</div>
+                    <div class="auction-status status-open">Aberto</div>
+                </div>
+                <div class="auction-details">
+                    <div class="auction-info">
+                        <div class="auction-description">
+                            Necessito de 500 catálogos de produtos, 20 páginas cada, colorido, papel couché 150g, com acabamento grampo canoa. Arquivo pronto para impressão.
+                        </div>
+                        <div class="auction-meta">
+                            <div class="auction-meta-item">
+                                <strong>Orçamento:</strong> Até R$ 3.500,00
+                            </div>
+                            <div class="auction-meta-item">
+                                <strong>Prazo:</strong> 30/05/2025
+                            </div>
+                            <div class="auction-meta-item">
+                                <strong>Leilão encerra em:</strong> 5 dias
+                            </div>
+                        </div>
+                    </div>
+                    <div class="auction-specs">
+                        <div class="auction-spec-item">
+                            <strong>Quantidade:</strong> 500 unidades
+                        </div>
+                        <div class="auction-spec-item">
+                            <strong>Tamanho:</strong> A4 (210 x 297 mm)
+                        </div>
+                        <div class="auction-spec-item">
+                            <strong>Páginas:</strong> 20 páginas
+                        </div>
+                        <div class="auction-spec-item">
+                            <strong>Papel:</strong> Couché 150g
+                        </div>
+                        <div class="auction-spec-item">
+                            <strong>Cores:</strong> 4x4 (colorido)
+                        </div>
+                        <div class="auction-spec-item">
+                            <strong>Acabamento:</strong> Grampo canoa
+                        </div>
+                    </div>
+                </div>
+                <div class="auction-bids">
+                    <div class="bids-header">
+                        <div class="bids-title">Lances Recebidos</div>
+                        <div class="bid-count">1 lance</div>
+                    </div>
+                    <div class="bid-card">
+                        <div class="bid-info">
+                            <div class="bid-printer">Gráfica Digital</div>
+                            <div class="bid-details">
+                                <div class="bid-detail"><strong>Valor:</strong> R$ 3.200,00</div>
+                                <div class="bid-detail"><strong>Tempo de produção:</strong> 8 dias</div>
+                                <div class="bid-detail"><strong>Entrega:</strong> 2 dias</div>
+                            </div>
+                        </div>
+                        <div class="bid-actions">
+                            <button class="bid-action-btn btn-accept">Aceitar Lance</button>
+                            <button class="bid-action-btn btn-contact">Contatar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="place-bid-form">
+                <div class="form-title">Dar Lance para "10.000 Flyers A5 Coloridos"</div>
+                <form>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label class="form-label">Valor do Lance (R$)</label>
+                                <input type="text" class="form-input" placeholder="Ex: 1800.00">
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label class="form-label">Tempo de Produção (dias)</label>
+                                <input type="number" class="form-input" placeholder="Ex: 5">
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label class="form-label">Tempo de Entrega (dias)</label>
+                                <input type="number" class="form-input" placeholder="Ex: 2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Comentários Adicionais</label>
+                        <textarea class="form-textarea" placeholder="Descreva detalhes adicionais sobre seu lance, como especificações técnicas, garantias, etc."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Enviar Lance</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <div class="page-item">
+                <a href="#" class="page-link active">1</a>
+            </div>
+            <div class="page-item">
+                <a href="#" class="page-link">2</a>
+            </div>
+            <div class="page-item">
+                <a href="#" class="page-link">3</a>
+            </div>
+            <div class="page-item">
+                <a href="#" class="page-link">»</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Go Print</h3>
+                    <a href="#">Sobre nós</a>
+                    <a href="#">Como funciona</a>
+                    <a href="#">Carreiras</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Para Clientes</h3>
+                    <a href="#">Cadastre-se</a>
+                    <a href="#">Fazer pedido</a>
+                    <a href="#">Rastrear entrega</a>
+                    <a href="#">Suporte</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Para Gráficas</h3>
+                    <a href="#">Seja um parceiro</a>
+                    <a href="#">Painel de controle</a>
+                    <a href="#">Preços e taxas</a>
+                    <a href="#">Suporte para parceiros</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Para Entregadores</h3>
+                    <a href="#">Cadastre-se como entregador</a>
+                    <a href="#">App do entregador</a>
+                    <a href="#">Ganhos e pagamentos</a>
+                    <a href="#">Suporte para entregadores</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Go Print. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

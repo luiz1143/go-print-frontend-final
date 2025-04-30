@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Print - Página Inicial (Wireframe)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #f8f8f8;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a90e2;
+        }
+        .nav-menu {
+            display: flex;
+        }
+        .nav-item {
+            margin-left: 20px;
+            color: #666;
+            text-decoration: none;
+        }
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+        .user-actions a {
+            margin-left: 15px;
+            text-decoration: none;
+            color: #4a90e2;
+        }
+        .search-bar {
+            padding: 30px 0;
+            background-color: #4a90e2;
+            color: white;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .search-input {
+            flex-grow: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+        .search-button {
+            padding: 12px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        .section-title {
+            font-size: 24px;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        .nearby-printers {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .printer-card {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            background-color: #fff;
+        }
+        .printer-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .printer-rating {
+            color: #f8c000;
+            margin-bottom: 10px;
+        }
+        .printer-address {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .printer-distance {
+            color: #4a90e2;
+            font-size: 14px;
+        }
+        .popular-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .service-card {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            background-color: #fff;
+            text-align: center;
+        }
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #eee;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .service-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .service-description {
+            color: #666;
+            font-size: 14px;
+        }
+        .promotions {
+            margin-bottom: 40px;
+        }
+        .promotion-card {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            background-color: #fff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .promotion-image {
+            width: 100px;
+            height: 100px;
+            background-color: #eee;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .promotion-content {
+            flex-grow: 1;
+        }
+        .promotion-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .promotion-description {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .promotion-code {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #f8f8f8;
+            border: 1px dashed #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .footer-column {
+            flex-basis: 200px;
+            margin-bottom: 20px;
+        }
+        .footer-column h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .footer-column a {
+            display: block;
+            color: #ddd;
+            text-decoration: none;
+            margin-bottom: 8px;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .nav-menu {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: space-between;
+            }
+            .nav-item {
+                margin-left: 0;
+            }
+            .user-actions {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: space-between;
+            }
+            .user-actions a {
+                margin-left: 0;
+            }
+            .search-container {
+                flex-direction: column;
+            }
+            .search-input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+            .search-button {
+                border-radius: 4px;
+            }
+            .nearby-printers, .popular-services {
+                grid-template-columns: 1fr;
+            }
+            .promotion-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .promotion-image {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Go Print</div>
+                <nav class="nav-menu">
+                    <a href="#" class="nav-item">Início</a>
+                    <a href="#" class="nav-item">Marketplace</a>
+                    <a href="#" class="nav-item">Leilões</a>
+                    <a href="#" class="nav-item">Como Funciona</a>
+                </nav>
+                <div class="user-actions">
+                    <a href="#">Entrar</a>
+                    <a href="#">Cadastrar</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="search-bar">
+        <div class="container">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="O que você precisa imprimir hoje?">
+                <button class="search-button">Buscar</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title">Gráficas e Papelarias Próximas</h2>
+        <div class="nearby-printers">
+            <div class="printer-card">
+                <div class="printer-name">Gráfica Rápida Express</div>
+                <div class="printer-rating">★★★★☆ 4.2</div>
+                <div class="printer-address">Av. Paulista, 1000 - Bela Vista</div>
+                <div class="printer-distance">1.2 km de distância</div>
+            </div>
+            <div class="printer-card">
+                <div class="printer-name">Papelaria Central</div>
+                <div class="printer-rating">★★★★★ 4.8</div>
+                <div class="printer-address">Rua Augusta, 500 - Consolação</div>
+                <div class="printer-distance">0.8 km de distância</div>
+            </div>
+            <div class="printer-card">
+                <div class="printer-name">Print & Copy</div>
+                <div class="printer-rating">★★★☆☆ 3.5</div>
+                <div class="printer-address">Rua Oscar Freire, 200 - Jardins</div>
+                <div class="printer-distance">2.5 km de distância</div>
+            </div>
+            <div class="printer-card">
+                <div class="printer-name">Gráfica Digital</div>
+                <div class="printer-rating">★★★★☆ 4.1</div>
+                <div class="printer-address">Av. Rebouças, 1500 - Pinheiros</div>
+                <div class="printer-distance">3.0 km de distância</div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Serviços Populares</h2>
+        <div class="popular-services">
+            <div class="service-card">
+                <div class="service-icon">📄</div>
+                <div class="service-name">Impressão Colorida</div>
+                <div class="service-description">A partir de R$ 1,50 por página</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📚</div>
+                <div class="service-name">Encadernação</div>
+                <div class="service-description">A partir de R$ 5,00</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📇</div>
+                <div class="service-name">Cartões de Visita</div>
+                <div class="service-description">100 unidades por R$ 50,00</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <div class="service-name">Plotagem</div>
+                <div class="service-description">A partir de R$ 15,00 por m²</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📃</div>
+                <div class="service-name">Impressão de Documentos</div>
+                <div class="service-description">A partir de R$ 0,25 por página</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🖼️</div>
+                <div class="service-name">Banners</div>
+                <div class="service-description">A partir de R$ 60,00</div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Promoções</h2>
+        <div class="promotions">
+            <div class="promotion-card">
+                <div class="promotion-image"></div>
+                <div class="promotion-content">
+                    <div class="promotion-title">50% OFF na primeira impressão</div>
+                    <div class="promotion-description">Válido para novos usuários em pedidos acima de R$ 30,00</div>
+                    <div class="promotion-code">BEMVINDO50</div>
+                </div>
+            </div>
+            <div class="promotion-card">
+                <div class="promotion-image"></div>
+                <div class="promotion-content">
+                    <div class="promotion-title">Frete Grátis</div>
+                    <div class="promotion-description">Em pedidos acima de R$ 50,00 para entregas até 5km</div>
+                    <div class="promotion-code">FRETEGRATIS</div>
+                </div>
+            </div>
+            <div class="promotion-card">
+                <div class="promotion-image"></div>
+                <div class="promotion-content">
+                    <div class="promotion-title">10% OFF em Encadernações</div>
+                    <div class="promotion-description">Válido para qualquer tipo de encadernação</div>
+                    <div class="promotion-code">ENCAD10</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Go Print</h3>
+                    <a href="#">Sobre nós</a>
+                    <a href="#">Como funciona</a>
+                    <a href="#">Carreiras</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Para Clientes</h3>
+                    <a href="#">Cadastre-se</a>
+                    <a href="#">Fazer pedido</a>
+                    <a href="#">Rastrear entrega</a>
+                    <a href="#">Suporte</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Para Gráficas</h3>
+                    <a href="#">Seja um parceiro</a>
+                    <a href="#">Painel de controle</a>
+                    <a href="#">Preços e taxas</a>
+                    <a href="#">Suporte para parceiros</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Para Entregadores</h3>
+                    <a href="#">Cadastre-se como entregador</a>
+                    <a href="#">App do entregador</a>
+                    <a href="#">Ganhos e pagamentos</a>
+                    <a href="#">Suporte para entregadores</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Go Print. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
