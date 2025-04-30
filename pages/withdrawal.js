@@ -1,3 +1,5 @@
+// Atualização forçada para corrigir erro de importação no Vercel
+
 import React, { useState, useEffect } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Text, useToast, Flex, Spinner, Alert, AlertIcon, AlertTitle, AlertDescription } from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext';
